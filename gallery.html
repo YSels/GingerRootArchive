@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ginger Root Archive - Gallery</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="CSS/main.css">
+
+    <style>
+        /* Polaroid Stijlen */
+        .polaroid {
+            break-inside: avoid;
+            background-color: #fff;
+            padding: 0.75rem;
+            padding-bottom: 3rem;
+            box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease, z-index 0s;
+            position: relative;
+            cursor: pointer;
+            margin-bottom: 2rem;
+        }
+
+        .polaroid-caption {
+            position: absolute;
+            bottom: 0.5rem;
+            left: 0;
+            width: 100%;
+            text-align: center;
+            font-family: 'VT323', monospace;
+            color: #333;
+            font-size: 1.1rem;
+            line-height: 1.2;
+            text-transform: uppercase;
+        }
+
+        .polaroid-date {
+            display: block;
+            font-size: 0.8rem;
+            color: #666;
+        }
+
+        .polaroid:hover {
+            transform: scale(1.05) rotate(0deg) !important;
+            z-index: 10;
+            box-shadow: 10px 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Lightbox Stijlen */
+        #lightbox {
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        #lightbox.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+    </style>
+</head>
+
+<body class="p-8 max-w-7xl mx-auto">
+
+    <div class="vhs-overlay"></div>
+
+    <audio id="vhs-sound" src="audio/insert.mp3" preload="auto"></audio>
+
+    <div id="lightbox" class="fixed inset-0 z-[10000] bg-black/90 flex items-center justify-center p-4"
+        onclick="closeLightbox()">
+    
+        <div class="relative max-w-full w-auto flex flex-col items-center">
+    
+            <img id="lightbox-img" src=""
+                class="max-h-[80vh] w-auto border-4 border-white shadow-[0_0_50px_rgba(255,255,255,0.2)]">
+    
+            <p id="lightbox-caption" class="text-white text-center text-2xl mt-4 font-vt323 tracking-widest"></p>
+            <p class="text-gray-500 text-center mt-2 text-sm cursor-pointer">[ CLICK ANYWHERE TO CLOSE ]</p>
+        </div>
+    
+    </div>
+
+    <header class="mb-12">
+        <h1 class="neon-text text-6xl mb-4">Ginger Root Archive</h1>
+        <nav>
+            <ul class="flex gap-6 text-xl neon-accent">
+                <li><a href="index.html" class="hover:text-blue-300 transition-colors">Home</a></li>
+                <li><a href="albums.html" class="hover:text-blue-300 transition-colors">Albums</a></li>
+                <li><a href="demos.html" class="hover:text-blue-300 transition-colors">Demos</a></li>
+                <li><a href="gallery.html" class="text-pink-500 border-b-2 border-pink-500">Gallery</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="mb-16">
+            <h2 class="text-4xl mb-6 neon-accent border-b-2 border-white/10 pb-2 inline-block">Tour Snapshots</h2>
+
+            <div class="columns-1 sm:columns-2 lg:columns-3 gap-8 space-y-8 p-4">
+                <div class="polaroid rotate-2"
+                    onclick="openLightbox('images/Cam1.jpg', 'Tolhuistuin, Amsterdam')">
+                    <img src="images/Cam1.JPG"
+                        class="max-h-[75h] w-auto mx-auto h-auto grayscale-0 hover:grayscale-0 transition-all duration-500">
+                    <div class="polaroid-caption">Tolhuistuin, Amsterdam<span class="polaroid-date">NOV 27, 2024</span>
+                    </div>
+                </div>
+                <div class="polaroid -rotate-1" onclick="openLightbox('images/Dylan1.jpg', 'Tolhuistuin, Amsterdam')">
+                    <img src="images/Dylan1.JPG"
+                        class="w-full h-auto grayscale-0 hover:grayscale-0 transition-all duration-500">
+                    <div class="polaroid-caption">Tolhuistuin, Amsterdam<span class="polaroid-date">NOV 27, 2024</span></div>
+                </div>
+                <div class="polaroid rotate-3" onclick="openLightbox('images/Matt1.jpg', 'Tolhuistuin, Amsterdam')">
+                    <img src="images/Matt1.JPG"
+                        class="w-full h-auto grayscale-0 hover:grayscale-0 transition-all duration-500">
+                    <div class="polaroid-caption">Tolhuistuin, Amsterdam<span class="polaroid-date">NOV 27, 2024</span></div>
+                </div>
+                <div class="polaroid -rotate-2" onclick="openLightbox('images/Cam2.jpg', 'Tolhuistuin, Amsterdam')">
+                    <img src="images/Cam2.JPG"
+                        class="w-full h-auto grayscale-0 hover:grayscale-0 transition-all duration-500">
+                    <div class="polaroid-caption">Tolhuistuin, Amsterdam<span class="polaroid-date">NOV 27, 2024</span></div>
+                </div>
+                <div class="polaroid rotate-1" onclick="openLightbox('images/Dylan2.jpg', 'TTolhuistuin, Amsterdam')">
+                    <img src="images/Dylan2.JPG"
+                        class="w-full h-auto grayscale-0 hover:grayscale-0 transition-all duration-500">
+                    <div class="polaroid-caption">Tolhuistuin, Amsterdam<span class="polaroid-date">NOV 27, 2024</span></div>
+                </div>
+                <div class="polaroid -rotate-3" onclick="openLightbox('images/Matt2.jpg', 'Tolhuistuin, Amsterdam')">
+                    <img src="images/Matt2.JPG"
+                        class="w-full h-auto grayscale-0 hover:grayscale-0 transition-all duration-500">
+                    <div class="polaroid-caption">Tolhuistuin, Amsterdam<span class="polaroid-date">NOV 27, 2024</span></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="mb-12">
+            <h2 class="text-4xl mb-6 neon-accent border-b-2 border-white/10 pb-2 inline-block">Video Archive (VHS)</h2>
+            <div class="card-grid">
+
+                <div class="ginger-card cursor-pointer group" onclick="playVideo('videos/loretta.mp4')">
+                    <div
+                        class="bg-black p-4 rounded mb-4 relative border border-gray-700 h-48 flex flex-col justify-center items-center shadow-inner">
+                        <div
+                            class="w-full h-12 bg-white/10 border border-gray-600 rounded mb-2 flex justify-between px-4 items-center">
+                            <div class="w-12 h-12 rounded-full bg-white/20 border border-gray-500 animate-spin-slow">
+                            </div>
+                            <div class="w-12 h-12 rounded-full bg-white/20 border border-gray-500 animate-spin-slow">
+                            </div>
+                        </div>
+                        <span class="text-gray-500 text-xs tracking-widest absolute bottom-2">VHS // T-120</span>
+                        <div
+                            class="absolute top-2 left-2 bg-white text-black px-2 py-0.5 text-sm font-bold rotate-1 transform shadow-md">
+                            LORETTA</div>
+                    </div>
+                    <h3 class="card-title">Loretta</h3>
+                    <p class="card-desc group-hover:text-blue-300 transition-colors">Official Music Video</p>
+                </div>
+
+                <div class="ginger-card cursor-pointer group" onclick="playVideo('videos/loneliness.mp4')">
+                    <div
+                        class="bg-black p-4 rounded mb-4 relative border border-gray-700 h-48 flex flex-col justify-center items-center shadow-inner">
+                        <div
+                            class="w-full h-12 bg-white/10 border border-gray-600 rounded mb-2 flex justify-between px-4 items-center">
+                            <div class="w-12 h-12 rounded-full bg-white/20 border border-gray-500"></div>
+                            <div class="w-12 h-12 rounded-full bg-white/20 border border-gray-500"></div>
+                        </div>
+                        <span class="text-gray-500 text-xs tracking-widest absolute bottom-2">VHS // SP MODE</span>
+                        <div
+                            class="absolute top-2 left-2 bg-white text-black px-2 py-0.5 text-sm font-bold -rotate-1 transform shadow-md">
+                            LONELINESS</div>
+                    </div>
+                    <h3 class="card-title">Loneliness</h3>
+                    <p class="card-desc group-hover:text-blue-300 transition-colors">Official Music Video</p>
+                </div>
+
+                <div class="ginger-card cursor-pointer group" onclick="playVideo('videos/City Slicker.mp4')">
+                    <div
+                        class="bg-black p-4 rounded mb-4 relative border border-gray-700 h-48 flex flex-col justify-center items-center shadow-inner">
+                        <div class="w-full h-12 bg-white/10 border border-gray-600 rounded mb-2 flex justify-between px-4 items-center">
+                            <div class="w-12 h-12 rounded-full bg-white/20 border border-gray-500 animate-spin-slow">
+                            </div>
+                            <div class="w-12 h-12 rounded-full bg-white/20 border border-gray-500 animate-spin-slow">
+                            </div>
+                        </div>
+                        <span class="text-gray-500 text-xs tracking-widest absolute bottom-2">VHS // T-120</span>
+                        <div
+                            class="absolute top-2 left-2 bg-white text-black px-2 py-0.5 text-sm font-bold rotate-1 transform shadow-md">
+                            CITY SLICKER</div>
+                    </div>
+                    <h3 class="card-title">City Slicker</h3>
+                    <p class="card-desc group-hover:text-blue-300 transition-colors">Official Music Video</p>
+                </div>
+
+                <div class="ginger-card cursor-pointer group" onclick="playVideo('videos/Juban District.mp4')">
+                    <div
+                        class="bg-black p-4 rounded mb-4 relative border border-gray-700 h-48 flex flex-col justify-center items-center shadow-inner">
+                        <div class="w-full h-12 bg-white/10 border border-gray-600 rounded mb-2 flex justify-between px-4 items-center">
+                            <div class="w-12 h-12 rounded-full bg-white/20 border border-gray-500 animate-spin-slow">
+                            </div>
+                            <div class="w-12 h-12 rounded-full bg-white/20 border border-gray-500 animate-spin-slow">
+                            </div>
+                        </div>
+                        <span class="text-gray-500 text-xs tracking-widest absolute bottom-2">VHS // T-120</span>
+                        <div
+                            class="absolute top-2 left-2 bg-white text-black px-2 py-0.5 text-sm font-bold rotate-1 transform shadow-md">
+                            JUBAN DISTRICT</div>
+                    </div>
+                    <h3 class="card-title">Juban District</h3>
+                    <p class="card-desc group-hover:text-blue-300 transition-colors">Official Music Video</p>
+                </div>
+
+                <div class="ginger-card cursor-pointer group" onclick="playVideo('videos/Over The Hill.mp4')">
+                    <div
+                        class="bg-black p-4 rounded mb-4 relative border border-gray-700 h-48 flex flex-col justify-center items-center shadow-inner">
+                        <div class="w-full h-12 bg-white/10 border border-gray-600 rounded mb-2 flex justify-between px-4 items-center">
+                            <div class="w-12 h-12 rounded-full bg-white/20 border border-gray-500 animate-spin-slow">
+                            </div>
+                            <div class="w-12 h-12 rounded-full bg-white/20 border border-gray-500 animate-spin-slow">
+                            </div>
+                        </div>
+                        <span class="text-gray-500 text-xs tracking-widest absolute bottom-2">VHS // T-120</span>
+                        <div
+                            class="absolute top-2 left-2 bg-white text-black px-2 py-0.5 text-sm font-bold rotate-1 transform shadow-md">
+                            OVER THE HILL</div>
+                    </div>
+                    <h3 class="card-title">Over The Hill</h3>
+                    <p class="card-desc group-hover:text-blue-300 transition-colors">Official Music Video</p>
+                </div>
+
+                <div class="ginger-card cursor-pointer group" onclick="playVideo('videos/No Problems.mp4')">
+                    <div
+                        class="bg-black p-4 rounded mb-4 relative border border-gray-700 h-48 flex flex-col justify-center items-center shadow-inner">
+                        <div class="w-full h-12 bg-white/10 border border-gray-600 rounded mb-2 flex justify-between px-4 items-center">
+                            <div class="w-12 h-12 rounded-full bg-white/20 border border-gray-500 animate-spin-slow">
+                            </div>
+                            <div class="w-12 h-12 rounded-full bg-white/20 border border-gray-500 animate-spin-slow">
+                            </div>
+                        </div>
+                        <span class="text-gray-500 text-xs tracking-widest absolute bottom-2">VHS // T-120</span>
+                        <div
+                            class="absolute top-2 left-2 bg-white text-black px-2 py-0.5 text-sm font-bold rotate-1 transform shadow-md">
+                            NO PROBLEMS</div>
+                    </div>
+                    <h3 class="card-title">No Problems</h3>
+                    <p class="card-desc group-hover:text-blue-300 transition-colors">Official Music Video</p>
+                </div>
+
+                <div class="ginger-card cursor-pointer group" onclick="playVideo('videos/Shinbangumi Adult Swim.mp4')">
+                    <div
+                        class="bg-black p-4 rounded mb-4 relative border border-gray-700 h-48 flex flex-col justify-center items-center shadow-inner">
+                        <div class="w-full h-12 bg-white/10 border border-gray-600 rounded mb-2 flex justify-between px-4 items-center">
+                            <div class="w-12 h-12 rounded-full bg-white/20 border border-gray-500 animate-spin-slow">
+                            </div>
+                            <div class="w-12 h-12 rounded-full bg-white/20 border border-gray-500 animate-spin-slow">
+                            </div>
+                        </div>
+                        <span class="text-gray-500 text-xs tracking-widest absolute bottom-2">VHS // T-120</span>
+                        <div
+                            class="absolute top-2 left-2 bg-white text-black px-2 py-0.5 text-sm font-bold rotate-1 transform shadow-md">
+                            ADULT SWIM - SHINBANGUMI MUSIC STORY</div>
+                    </div>
+                    <h3 class="card-title">AS - Shinbangumi</h3>
+                    <p class="card-desc group-hover:text-blue-300 transition-colors">Official Music Story</p>
+                </div>
+
+                <div class="ginger-card cursor-pointer group" onclick="playVideo('videos/End of Shinbangumi.mp4')">
+                    <div
+                        class="bg-black p-4 rounded mb-4 relative border border-gray-700 h-48 flex flex-col justify-center items-center shadow-inner">
+                        <div class="w-full h-12 bg-white/10 border border-gray-600 rounded mb-2 flex justify-between px-4 items-center">
+                            <div class="w-12 h-12 rounded-full bg-white/20 border border-gray-500 animate-spin-slow">
+                            </div>
+                            <div class="w-12 h-12 rounded-full bg-white/20 border border-gray-500 animate-spin-slow">
+                            </div>
+                        </div>
+                        <span class="text-gray-500 text-xs tracking-widest absolute bottom-2">VHS // T-120</span>
+                        <div
+                            class="absolute top-2 left-2 bg-white text-black px-2 py-0.5 text-sm font-bold rotate-1 transform shadow-md">
+                            END OF SHINBANGUMI</div>
+                    </div>
+                    <h3 class="card-title">End of Shinbangumi</h3>
+                    <p class="card-desc group-hover:text-blue-300 transition-colors">Official Music Story</p>
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+    <footer class="text-pink-400 text-xs uppercase tracking-widest opacity-75">
+        <p>&copy; 2025 Ginger Root Archive</p>
+    </footer>
+
+    <div id="vcr-player">
+        <div class="absolute top-4 right-8 text-white text-xl cursor-pointer z-50 hover:text-red-500 font-vt323 tracking-widest"
+            onclick="closeVideo()">[ EJECT TAPE ]</div>
+        <div id="blue-screen" class="blue-screen hidden">
+            <div class="flex justify-between w-full"><span class="blink-text">► PLAY</span><span>SP</span></div>
+            <div class="tracking-line"></div>
+            <div class="text-center mt-auto mb-auto">
+                <h2 class="text-6xl mb-4">GINGER ROOT</h2>
+                <p class="text-2xl">AUTO TRACKING...</p>
+            </div>
+            <div class="text-right">00:00:01</div>
+        </div>
+        <div class="video-container">
+            <video id="video-element" class="w-full h-full object-contain bg-black" controls>
+                <source src="" type="video/mp4">Your browser does not support the video tag.
+            </video>
+        </div>
+    </div>
+
+    <script>
+        // GSAP
+        gsap.from(".polaroid", { y: 100, opacity: 0, duration: 0.8, stagger: 0.2, ease: "back.out(1.7)" });
+
+        // Lightbox
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightbox-img');
+        const lightboxCap = document.getElementById('lightbox-caption');
+        function openLightbox(imageSrc, captionText) {
+            lightboxImg.src = imageSrc;
+            lightboxCap.innerText = captionText;
+            lightbox.classList.add('active');
+        }
+        function closeLightbox() {
+                lightbox.classList.remove('active'); // Start de fade-out animatie
+
+                // Wacht 300 milliseconden (de tijd van de animatie) en wis dan de foto
+                setTimeout(() => {
+                    lightboxImg.src = "";
+                    lightboxCap.innerText = "";
+                }, 300);
+            }
+
+        // VCR PLAYER MET SOUND EFFECT
+        const vcrPlayer = document.getElementById('vcr-player');
+        const blueScreen = document.getElementById('blue-screen');
+        const videoElement = document.getElementById('video-element');
+        const vhsSound = document.getElementById('vhs-sound'); // We selecteren de audio speler
+
+        function playVideo(videoPath) {
+            // 1. Speel het geluid af
+            vhsSound.currentTime = 0; // Terugspoelen naar begin voor de zekerheid
+            vhsSound.play();
+
+            // 2. Start de speler
+            vcrPlayer.classList.add('active');
+            blueScreen.classList.remove('hidden');
+            videoElement.src = videoPath;
+            videoElement.currentTime = 0;
+
+            setTimeout(() => {
+                blueScreen.classList.add('hidden');
+                videoElement.play();
+            }, 2500);
+        }
+
+        function closeVideo() {
+
+            vcrPlayer.classList.remove('active');
+            videoElement.pause();
+            videoElement.src = "";
+            blueScreen.classList.remove('hidden');
+        }
+    </script>
+
+</body>
+
+</html>
